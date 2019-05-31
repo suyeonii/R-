@@ -60,9 +60,11 @@ fruits6
 install.packages('readxl')
 library(readxl)
 fruits7 <- read_excel(fruits_6.xls", # path
-  sheet = "Sheet1", # sheet name to read from
-  range = "A2:D6" # cell range to read from
-  col_names = TRUE # TRUE to use the first row as column names
-  col_types = "guess" # guess the types of columns
-  na = "NA" # Character vector of strings to use for missing values
-fruits7
+  sheet = "Sheet1"# sheet name to read from
+  range = "A2:D6"# cell range to read from
+  col_names = TRUE# TRUE to use the first row as column names
+  col_types = "guess"# guess the types of columns
+  na = "NA" #Character vector of strings to use for missing values
+
+fruits_2
+fruits_2 <- subset(Fruits, fruits$Year==2008);fruits_
