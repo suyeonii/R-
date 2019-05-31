@@ -1,0 +1,9 @@
+print(1+2)
+class('a')
+class(1+2)
+print(pi)
+print(pi,digits=3)
+cat(1,':','a','\n',2,':','b')
+1;2;3
+'1'+'2'
+as.numeric('1')+as.numeric('2')
