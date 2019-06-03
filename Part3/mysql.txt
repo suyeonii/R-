@@ -1,0 +1,28 @@
+https://dev.mysql.com/downloads/file/?id=485751
+414MB 설치
+
+.NET Framework 4.5.2 Runtime 설치
+
+
+MySQL접속
+cd program files \ MySQL \ MySQL Server 5.7\bin\
+create user 'userID'@'%' identified by 'userpassword';
+creat user 'smartuser'@'localhost' identified by 'smartpass';
+grant all privileges on *.* to 'smartuser'@'localhost';
+flush privileges;
+exit
+
+
+https://www.heidisql.com/download.php#
+heidiSQL 9.5051.exe 설치
+
+ 
+세션관리자-신규-MySQL TCP/IP
+smartuser - smartpass
+도구-환경설정-격자서식설정-글꼴 D2코딩
+쿼리에 복사 붙여넣기
+create database ezen
+  default character set utf8
+  default collate utf8_general_ci;
+재생-Smart에서 새로고침-Ezen폴더 생성
+
