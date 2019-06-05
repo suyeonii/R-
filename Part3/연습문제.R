@@ -16,5 +16,9 @@ season <- matrix (c('봄','여름','가을','겨울'),nrow=2,byrow=T);season
 2
 season[,2]
 3
-matr
-season2 <- rbind(mat,c('초봄','초가을'))
+season2 <- rbind(season,c('초봄','초가을'));season2
+4
+season3 <- cbind(season2,c('초여름','초겨울','한겨울'));season3
+
+data1 <- read.csv('data1.csv') ;data1
+apply (sum(2:15))
