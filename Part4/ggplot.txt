@@ -1,0 +1,7 @@
+ggplot (데이터 셋, 그래프 골격)
+geom_ line, point, bar, …
+title + x/y label + color + legend ….
+시계열그래프
+R all graphs
+
+마크다운 

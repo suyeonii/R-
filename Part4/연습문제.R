@@ -17,18 +17,30 @@ write.csv(x = iris,
 iris <- read.csv(file = "D:/workspace/TIL/R_Data_Analysis/Part4/iris.csv",
                    stringsAsFactors = F)
 
-#1
+#1 
+library(dplyr)
+setosa <- filter(iris, Species == "setosa" )
+versicolor <- filter(iris, Species == "versicolor" )
+virginica <- filter(iris, Species == "verginica" )
+=
 setosa <- filter(iris, Species %in% c("setosa"))
 versicolor <- filter(iris, Species %in% c("versicolor"))
 virginica <- filter(iris, Species %in% c("virginica"))
 
+
 par(mfrow=c(3,2))
-plot(x = setosa$Sepal.Length, y = setosa$Sepal.Width, xlab="length", ylab="Width", main="Setosa's Sepal")
-plot(x = setosa$Petal.Length, y = setosa$Petal.Width, xlab="length", ylab="Width", main="Setosa's Petal")
-plot(x = versicolor$Sepal.Length, y = versicolor$Sepal.Width, xlab="length", ylab="Width", main="versicolor's Sepal")
-plot(x = versicolor$Petal.Length, y = versicolor$Petal.Width, xlab="length", ylab="Width", main="versicolor's Petal")
-plot(x = virginica$Sepal.Length, y = virginica$Sepal.Width, xlab="length", ylab="Width", main="virginica's Sepal")
-plot(x = virginica$Petal.Length, y = virginica$Petal.Width, xlab="length", ylab="Width", main="virginica's Petal")
+plot(x = setosa$Sepal.Length, y = setosa$Sepal.Width, xlab="length", ylab="Width", main="Setosa's Sepal",
+     xlim=c(4, 8.1), ylim=c(1.9, 4.5))
+plot(x = setosa$Petal.Length, y = setosa$Petal.Width, xlab="length", ylab="Width", main="Setosa's Petal",
+     xlim=c(0.8, 7), ylim=c(0, 2.6))
+plot(x = versicolor$Sepal.Length, y = versicolor$Sepal.Width, xlab="length", ylab="Width", main="versicolor's Sepal",
+     xlim=c(4, 8.1), ylim=c(1.9, 4.5))
+plot(x = versicolor$Petal.Length, y = versicolor$Petal.Width, xlab="length", ylab="Width", main="versicolor's Petal",
+     xlim=c(0.8, 7), ylim=c(0, 2.6))
+plot(x = virginica$Sepal.Length, y = virginica$Sepal.Width, xlab="length", ylab="Width", main="virginica's Sepal",
+     xlim=c(4, 8.1), ylim=c(1.9, 4.5))
+plot(x = virginica$Petal.Length, y = virginica$Petal.Width, xlab="length", ylab="Width", main="virginica's Petal",
+     xlim=c(0.8, 7), ylim=c(0, 2.6))
 
 
 
