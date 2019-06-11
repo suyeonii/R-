@@ -1,0 +1,804 @@
+---
+title: "Untitled"
+author: "suyeon"
+date: '2019 6 11 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+# 2015년 1월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+data1 <- readLines("응답소_2015_01.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+head(unlist(data2), 30)
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) <= 6 & nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <-gsub("제목" ,"", data3)
+data3 <-gsub("안녕" ,"", data3)
+data3 <-gsub("시장공개일" ,"", data3)
+data3 <-gsub("상담내용" ,"", data3)
+data3 <-gsub("있는걸로" ,"", data3)
+data3 <-gsub("다름이 아니고" ,"", data3)
+data3 <-gsub("생각" ,"", data3)
+data3 <-gsub("들이" ,"", data3)
+data3 <-gsub("ㅎㅎ" ,"", data3)
+data3 <-gsub("추울까봐" ,"", data3)
+data3 <-gsub("사실입니다만" ,"", data3)
+data3 <-gsub("사실" ,"", data3)
+data3 <-gsub("하게" ,"", data3)
+data3 <-gsub("서울시" ,"", data3)
+data3 <-gsub("답변" ,"", data3)
+
+data3
+
+write(unlist(data3), "응답소1.txt")
+data4 <- read.table("응답소1.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 30)
+txt <- readLines("gsub1.txt")
+
+par(mar=c(0.1,0.1,0.1,0.1))
+set.seed(1212)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 1월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+
+```
+
+
+# 2015년 2월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_02.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) <= 6 & nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("sh", "", data3)
+data3 <- gsub("SH", "", data3)
+data3 <- gsub("경우", "", data3)
+
+
+write(unlist(data3), "응답소2.txt")
+data4 <- read.table("응답소2.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 2월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 3월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_03.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+
+write(unlist(data3), "응답소3.txt")
+data4 <- read.table("응답소3.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 3월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 4월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_04.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+
+write(unlist(data3), "응답소4.txt")
+data4 <- read.table("응답소4.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 4월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 5월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_05.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+
+write(unlist(data3), "응답소5.txt")
+data4 <- read.table("응답소5.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(8,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 5월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 6월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_06.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+
+write(unlist(data3), "응답소6.txt")
+data4 <- read.table("응답소6.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 6월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 7월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_07.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+
+write(unlist(data3), "응답소7.txt")
+data4 <- read.table("응답소7.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 7월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 8월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_08.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+
+write(unlist(data3), "응답소8.txt")
+data4 <- read.table("응답소8.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 8월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 9월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_09.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+data3 <- gsub("박원순", "", data3)
+
+write(unlist(data3), "응답소9.txt")
+data4 <- read.table("응답소9.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 9월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 10월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_10.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+data3 <- gsub("박원순", "", data3)
+
+write(unlist(data3), "응답소10.txt")
+data4 <- read.table("응답소10.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 10월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 11월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_11.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+data3 <- gsub("박원순", "", data3)
+
+write(unlist(data3), "응답소11.txt")
+data4 <- read.table("응답소11.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(6,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 11월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+# 2015년 12월 응답소 데이터
+```{r}
+setwd("d:/Workspace/TIL/R_Data_Analysis/Part2/Stage1_Word cloud/연습문제/")
+library(KoNLP)
+library(wordcloud)
+library(RColorBrewer)
+library(stringr)
+useSejongDic()
+
+
+
+data1 <- readLines("응답소_2015_12.txt")
+data2 <- sapply(data1, extractNoun, USE.NAMES=F) ;data2
+data3 <- unlist(data2) ;data3
+data3 <- str_replace_all(data3, "[^[:alpha:]]", "") ;data3
+data3 <- Filter(function(x) {nchar(x) > 1}, data3) ;data3
+head(unlist(data3), 30)
+
+data3 <- gsub("\\d+", "", data3)
+data3 <- gsub("제목", "", data3)
+data3 <- gsub("서울시장", "", data3)
+data3 <- gsub("상담내용", "", data3)
+data3 <- gsub("서울", "", data3)
+data3 <- gsub("통장님", "", data3)
+data3 <- gsub("그정도는", "", data3)
+data3 <- gsub("이것", "", data3)
+data3 <- gsub("문밖", "", data3)
+data3 <- gsub("미국이나", "", data3)
+data3 <- gsub("저희", "", data3)
+data3 <- gsub("민원", "", data3)
+data3 <- gsub("시장", "", data3)
+data3 <- gsub("사람", "", data3)
+data3 <- gsub("요청", "", data3)
+data3 <- gsub("이유", "", data3)
+data3 <- gsub("사업", "", data3)
+data3 <- gsub("내용", "", data3)
+data3 <- gsub("들이", "", data3)
+data3 <- gsub("하게", "", data3)
+data3 <- gsub("경우", "", data3)
+data3 <- gsub("답변", "", data3)
+data3 <- gsub("문제", "", data3)
+data3 <- gsub("시민", "", data3)
+data3 <- gsub("공개", "", data3)
+data3 <- gsub("주민", "", data3)
+data3 <- gsub("당시", "", data3)
+data3 <- gsub("우리", "", data3)
+data3 <- gsub("안녕", "", data3)
+data3 <- gsub("생각", "", data3)
+data3 <- gsub("시", "", data3)
+data3 <- gsub("박원순", "", data3)
+
+write(unlist(data3), "응답소12.txt")
+data4 <- read.table("응답소12.txt")
+data4
+nrow(data4)
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T), 20)
+set.seed(1212)
+palete <- brewer.pal(5,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq=2,
+          random.order=F, random.color=T, colors=palete)
+legend(0.3, 1, "2015년 12월 응답소", cex=0.8, fill=NA, border=NA, bg="white", text.col="grey", text.font=2, box.col="black")
+par(mar=c(0.1,0.1,0.1,0.1))
+```
+
+
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
